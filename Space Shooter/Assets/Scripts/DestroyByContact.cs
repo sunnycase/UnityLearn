@@ -16,13 +16,13 @@ public class DestroyByContact : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Boundary")) return;
+        if (other.CompareTag("Boundary") || other.CompareTag(tag + " Own") || other.CompareTag(tag)) return;
         Destroy(other.gameObject);
         Destroy(gameObject);
 
         Instantiate(explosion, transform.position, transform.rotation);
 
-        if (!other.CompareTag("Player"))
+        if (!CompareTag("Player"))
             _gameController.AddScore(scoreValue);
         else
             _gameController.GameOver();
